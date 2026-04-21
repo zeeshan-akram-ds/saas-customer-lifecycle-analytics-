@@ -1,0 +1,5 @@
+Payment_ID,PaymentMethod
+1,Electronic check
+2,Mailed check
+3,Bank transfer (automatic)
+4,Credit card (automatic)
