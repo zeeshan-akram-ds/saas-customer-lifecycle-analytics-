@@ -1,0 +1,17 @@
+Demographic_ID,gender,SeniorCitizen,Partner,Dependents
+1,Female,0,Yes,No
+2,Male,0,No,No
+3,Female,0,No,No
+4,Male,0,No,Yes
+5,Male,0,Yes,Yes
+6,Male,0,Yes,No
+7,Female,0,Yes,Yes
+8,Male,1,No,No
+9,Female,0,No,Yes
+10,Female,1,Yes,No
+11,Male,1,Yes,No
+12,Female,1,No,No
+13,Female,1,Yes,Yes
+14,Male,1,Yes,Yes
+15,Male,1,No,Yes
+16,Female,1,No,Yes
