@@ -1,0 +1,52 @@
+table Dim_Date
+	lineageTag: 5c4b2740-e3be-48bd-8f8f-8fd14643e763
+
+	column Date
+		isHidden
+		formatString: Short Date
+		lineageTag: 4f616822-b950-4edd-a15e-b77bc4f00ae6
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		variation Variation
+			isDefault
+			relationship: e6205de5-2937-40fd-aae6-c18bd309b774
+			defaultHierarchy: LocalDateTable_c0616a36-8923-4db4-9232-8a8d0b697a64.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year = YEAR(Dim_Date[Date])
+		formatString: 0
+		lineageTag: 29fa1388-ff8e-4322-997c-ee2e6ae04608
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter = QUARTER(Dim_Date[Date])
+		formatString: 0
+		lineageTag: 903833cf-c395-4970-9616-339a6fd95c57
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Number' = MONTH(Dim_Date[Date])
+		formatString: 0
+		lineageTag: d1d97dd6-c2cf-4ece-b0fd-9f50a7be620f
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Name' = FORMAT(Dim_Date[Date], "MMMM")
+		lineageTag: 2689d6df-ba4d-4521-88b6-4dfc4351b73e
+		summarizeBy: none
+		sortByColumn: 'Month Number'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dim_Date = calculated
+		mode: import
+		source = CALENDAR(MIN(fact_churn[Proxy_Signup_Date]), DATE(2023, 12, 1))
+
+	annotation PBI_Id = d8f17ec2efd44279afb0fd2054127a23
+

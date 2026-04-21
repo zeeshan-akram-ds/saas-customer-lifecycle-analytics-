@@ -1,0 +1,194 @@
+table fact_churn
+	lineageTag: 70670c9d-0e20-466e-8de6-a945b393a3a5
+
+	column customerID
+		dataType: string
+		lineageTag: 51371729-3025-4ba2-8320-831f28048dfd
+		summarizeBy: none
+		sourceColumn: customerID
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthsSubscribed
+		dataType: int64
+		formatString: 0
+		lineageTag: 3091aa01-839d-4c34-bbc6-9e04a120dd49
+		summarizeBy: sum
+		sourceColumn: MonthsSubscribed
+
+		annotation SummarizationSetBy = Automatic
+
+	column PhoneService
+		dataType: string
+		lineageTag: e2204722-c2a8-4ad4-8419-d32478b53955
+		summarizeBy: none
+		sourceColumn: PhoneService
+
+		annotation SummarizationSetBy = Automatic
+
+	column MultipleLines
+		dataType: string
+		lineageTag: 1827bd33-5e5b-43d8-8dc5-5b2ac39b29d2
+		summarizeBy: none
+		sourceColumn: MultipleLines
+
+		annotation SummarizationSetBy = Automatic
+
+	column InternetService
+		dataType: string
+		lineageTag: b38df4c4-2806-4ed4-87d1-6ae08241dfff
+		summarizeBy: none
+		sourceColumn: InternetService
+
+		annotation SummarizationSetBy = Automatic
+
+	column OnlineSecurity
+		dataType: string
+		lineageTag: b9bbf757-856e-4b7a-bde0-92d910adb551
+		summarizeBy: none
+		sourceColumn: OnlineSecurity
+
+		annotation SummarizationSetBy = Automatic
+
+	column OnlineBackup
+		dataType: string
+		lineageTag: e11f2759-a23f-4ee2-9f56-69d0d869b6ae
+		summarizeBy: none
+		sourceColumn: OnlineBackup
+
+		annotation SummarizationSetBy = Automatic
+
+	column DeviceProtection
+		dataType: string
+		lineageTag: 14bdde0a-4fbf-4ed4-92b1-0f6525fefdd3
+		summarizeBy: none
+		sourceColumn: DeviceProtection
+
+		annotation SummarizationSetBy = Automatic
+
+	column TechSupport
+		dataType: string
+		lineageTag: 29077996-2825-4ded-a85f-2015ac154276
+		summarizeBy: none
+		sourceColumn: TechSupport
+
+		annotation SummarizationSetBy = Automatic
+
+	column StreamingTV
+		dataType: string
+		lineageTag: 13db5669-1b84-46f3-bb77-6c30b9bd60e1
+		summarizeBy: none
+		sourceColumn: StreamingTV
+
+		annotation SummarizationSetBy = Automatic
+
+	column StreamingMovies
+		dataType: string
+		lineageTag: c2f1c0cf-9e91-498e-976e-66b6b87b585d
+		summarizeBy: none
+		sourceColumn: StreamingMovies
+
+		annotation SummarizationSetBy = Automatic
+
+	column PaperlessBilling
+		dataType: string
+		lineageTag: af6780b0-284d-4068-9c9c-58e66a247f34
+		summarizeBy: none
+		sourceColumn: PaperlessBilling
+
+		annotation SummarizationSetBy = Automatic
+
+	column MRR
+		dataType: double
+		lineageTag: 930b38d5-29c1-49bc-b2ff-3e18b787d570
+		summarizeBy: sum
+		sourceColumn: MRR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column LTV
+		dataType: double
+		lineageTag: 613b30a4-e86f-472b-be18-2254a522c94c
+		summarizeBy: sum
+		sourceColumn: LTV
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Churn
+		dataType: string
+		lineageTag: 2d924fff-9eb3-4bc4-b145-4aca2a2b8246
+		summarizeBy: none
+		sourceColumn: Churn
+
+		annotation SummarizationSetBy = Automatic
+
+	column Churn_Flag
+		dataType: int64
+		formatString: 0
+		lineageTag: 1c75d107-2406-4797-8ef5-485f838a01bd
+		summarizeBy: sum
+		sourceColumn: Churn_Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column Tenure_Cohort
+		dataType: string
+		lineageTag: be9cef90-6739-4a79-984a-36ee334019d9
+		summarizeBy: none
+		sourceColumn: Tenure_Cohort
+
+		annotation SummarizationSetBy = Automatic
+
+	column Contract_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 10432524-779d-44ba-8146-feda1c3f17f6
+		summarizeBy: none
+		sourceColumn: Contract_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Payment_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: bec6c0bc-fbbc-4ebd-84d0-b7ca27a1f891
+		summarizeBy: none
+		sourceColumn: Payment_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Demographic_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: d7830735-46fb-41bb-bab3-5b2295e92941
+		summarizeBy: none
+		sourceColumn: Demographic_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Proxy_Signup_Date = EDATE(DATE(2023, 12, 1), -fact_churn[MonthsSubscribed])
+		isHidden
+		formatString: General Date
+		lineageTag: d16ffe96-17c2-4be6-80a3-3e9c21eba3c8
+		summarizeBy: none
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_churn = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("D:\data-analysis-projects\saas-churn-analytics\data\processed\fact_churn.csv"),[Delimiter=",", Columns=20, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"customerID", type text}, {"MonthsSubscribed", Int64.Type}, {"PhoneService", type text}, {"MultipleLines", type text}, {"InternetService", type text}, {"OnlineSecurity", type text}, {"OnlineBackup", type text}, {"DeviceProtection", type text}, {"TechSupport", type text}, {"StreamingTV", type text}, {"StreamingMovies", type text}, {"PaperlessBilling", type text}, {"MRR", type number}, {"LTV", type number}, {"Churn", type text}, {"Churn_Flag", Int64.Type}, {"Tenure_Cohort", type text}, {"Contract_ID", Int64.Type}, {"Payment_ID", Int64.Type}, {"Demographic_ID", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

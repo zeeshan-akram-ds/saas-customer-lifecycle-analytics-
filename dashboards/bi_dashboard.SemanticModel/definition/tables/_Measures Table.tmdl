@@ -1,0 +1,35 @@
+table '_Measures Table'
+	lineageTag: 1c0fca73-00a9-4f8c-b112-a0e28b37a944
+
+	measure 'Total Customers' = DISTINCTCOUNT(fact_churn[customerID])
+		formatString: #,0
+		lineageTag: 83d9ec6a-13aa-4eb7-b0f5-8215cac8d3ad
+
+	measure 'Churned Customers' = CALCULATE([Total Customers], fact_churn[Churn_Flag] = 1)
+		formatString: #,0
+		lineageTag: b657b863-d089-40fb-aa3c-42a588efd9eb
+
+	measure 'Churn Rate %' = DIVIDE([Churned Customers], [Total Customers])
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 368bf9fe-7f65-45ba-aba3-389f8c1a66f8
+
+	measure 'Total MRR' = SUM(fact_churn[MRR])
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: a76b52bb-ee56-409a-a063-42d41b4ae324
+
+	measure 'Revenue at Risk' = CALCULATE([Total MRR], fact_churn[Churn_Flag] = 1)
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: ec1fbd87-642e-4238-a897-00de066d07cf
+
+	partition '_Measures Table' = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Column1"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

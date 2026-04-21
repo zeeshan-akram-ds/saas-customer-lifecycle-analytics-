@@ -1,0 +1,21 @@
+relationship AutoDetected_5a24ea3a-479b-4497-8385-21ad782cabc7
+	fromColumn: fact_churn.Contract_ID
+	toColumn: dim_contract.Contract_ID
+
+relationship AutoDetected_d1d76b93-ec27-4828-836d-b7157f059626
+	fromColumn: fact_churn.Demographic_ID
+	toColumn: dim_demographic.Demographic_ID
+
+relationship AutoDetected_6b9b2aca-0093-430d-bc00-74fec5966447
+	fromColumn: fact_churn.Payment_ID
+	toColumn: dim_payment.Payment_ID
+
+relationship e6205de5-2937-40fd-aae6-c18bd309b774
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Dim_Date.Date
+	toColumn: LocalDateTable_c0616a36-8923-4db4-9232-8a8d0b697a64.Date
+
+relationship 7df97625-318c-2c5e-2e0e-28f7d9da64f8
+	fromColumn: fact_churn.Proxy_Signup_Date
+	toColumn: Dim_Date.Date
+

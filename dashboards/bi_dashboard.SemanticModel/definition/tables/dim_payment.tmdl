@@ -1,0 +1,32 @@
+table dim_payment
+	lineageTag: 626727fe-583d-4067-94a7-758a9a37f251
+
+	column Payment_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: a0ef7a8d-3e68-4a9a-9902-db48401ab969
+		summarizeBy: none
+		sourceColumn: Payment_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PaymentMethod
+		dataType: string
+		lineageTag: a458e89b-0c9e-47b7-a81c-ba2238ceeded
+		summarizeBy: none
+		sourceColumn: PaymentMethod
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_payment = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("D:\data-analysis-projects\saas-churn-analytics\data\processed\dim_payment.csv"),[Delimiter=",", Columns=2, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Payment_ID", Int64.Type}, {"PaymentMethod", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

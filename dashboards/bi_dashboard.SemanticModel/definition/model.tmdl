@@ -1,0 +1,27 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["fact_churn","dim_contract","dim_demographic","dim_payment","_Measures","_Measures Table"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.139.2054.0 (24.12)+334ca1c95b576cc53924655643b0d36f21caac55
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table fact_churn
+ref table dim_contract
+ref table dim_demographic
+ref table dim_payment
+ref table DateTableTemplate_7142fce8-f700-433e-8bde-d86376b2b0fb
+ref table Dim_Date
+ref table LocalDateTable_c0616a36-8923-4db4-9232-8a8d0b697a64
+ref table '_Measures Table'
+
+ref cultureInfo en-US
+

@@ -1,0 +1,57 @@
+table dim_demographic
+	lineageTag: af766dbe-6cce-4ee2-a140-d2b0cacce4fb
+
+	column Demographic_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: dd2a46f1-6540-442c-bdf4-3cca1be07ae4
+		summarizeBy: none
+		sourceColumn: Demographic_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column gender
+		dataType: string
+		lineageTag: 4af485d8-c1b5-46b3-9eed-95fca68f0072
+		summarizeBy: none
+		sourceColumn: gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column SeniorCitizen
+		dataType: int64
+		formatString: 0
+		lineageTag: cc0269fe-4109-4835-9105-db490a9a3680
+		summarizeBy: none
+		sourceColumn: SeniorCitizen
+
+		annotation SummarizationSetBy = Automatic
+
+	column Partner
+		dataType: string
+		lineageTag: 5fb56e7a-9111-471d-8f91-b4d8ff215edb
+		summarizeBy: none
+		sourceColumn: Partner
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dependents
+		dataType: string
+		lineageTag: 0b5c18f4-a7e7-4129-a05f-015c04128070
+		summarizeBy: none
+		sourceColumn: Dependents
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_demographic = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("D:\data-analysis-projects\saas-churn-analytics\data\processed\dim_demographic.csv"),[Delimiter=",", Columns=5, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Demographic_ID", Int64.Type}, {"gender", type text}, {"SeniorCitizen", Int64.Type}, {"Partner", type text}, {"Dependents", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
