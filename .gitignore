@@ -15,6 +15,7 @@ __pycache__/
 # =========================
 venv/
 env/
+.env
 .venv/
 
 # =========================
@@ -46,5 +47,6 @@ Thumbs.db
 dashboards/**/.pbi/cache.abf
 dashboards/**/.pbi/localSettings.json
 dashboards/**/.pbi/editorSettings.json
+*.pbix
 
 dashboards/**/.platform
