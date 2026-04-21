@@ -38,3 +38,13 @@ Thumbs.db
 # Temporary files
 # =========================
 *.tmp
+
+# =========================
+# Power BI 
+# =========================
+
+dashboards/**/.pbi/cache.abf
+dashboards/**/.pbi/localSettings.json
+dashboards/**/.pbi/editorSettings.json
+
+dashboards/**/.platform
