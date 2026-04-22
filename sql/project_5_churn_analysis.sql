@@ -55,4 +55,43 @@ SELECT
 FROM cleaned_saas_churn
 WHERE Churn_Flag = 1
 GROUP BY customerID
-ORDER BY Lost_MRR DESC LIMIT 10    
+ORDER BY Lost_MRR DESC LIMIT 10;
+
+/*
+Query 4: Churn Rate by Engineered Signup Cohort
+- Business Question: How does churn behave across different historical signup cohorts? Are newer cohorts churning faster than older ones?
+- Tables/Columns: `cleaned_saas_churn` (MonthsSubscribed, Churn_Flag).
+- Expected Output: 3 columns (cohort, Total_Customers, Churn_Rate_Pct). Requires engineering a proxy signup month by subtracting `MonthsSubscribed` from a static anchor date ('2023-12-01').
+*/
+
+SELECT
+    DATE_FORMAT(DATE_SUB('2023-12-01', INTERVAL MonthsSubscribed MONTH), '%Y-%m') AS cohort,
+    COUNT(*) AS Total_Customers,
+    ROUND(AVG(CASE WHEN Churn_Flag = 1 THEN 1 ELSE 0 END) * 100, 2) AS Churn_Rate_Pct
+FROM cleaned_saas_churn
+GROUP BY cohort
+ORDER BY cohort;
+
+/*
+Query 5: Top Decile Churn Rate
+- Business Question: What is the churn rate of our highest-revenue decile (top 10% of customers by MRR), and what does this imply for business risk?
+- Tables/Columns: `cleaned_saas_churn` (customerID, MRR, Churn_Flag).
+- Expected Output: 3 columns (bucket, Total_Customers, Churn_Rate_Pct) filtering strictly to the top revenue decile.
+*/
+
+WITH ranking AS (
+	SELECT
+		customerID,
+        NTILE(10) OVER(ORDER BY MRR DESC) AS bucket,
+        MRR,
+        Churn_Flag
+	FROM cleaned_saas_churn
+)
+
+SELECT
+    bucket,
+    COUNT(customerID) AS Total_Customers,
+    ROUND(AVG(CASE WHEN Churn_Flag = 1 THEN 1 ELSE 0 END) * 100, 2) AS Churn_Rate_Pct
+FROM ranking
+WHERE bucket = 1
+GROUP BY bucket;

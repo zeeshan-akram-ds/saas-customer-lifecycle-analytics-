@@ -47,3 +47,35 @@ Query 3: Top 10 Highest-MRR Churned Customers and Revenue Contribution
 | 1555-DJEQW     | 114.20   | 0.0821                 |
 | 9158-VCTQB     | 113.60   | 0.0816                 |
 | 7279-BUYWN     | 113.20   | 0.0814                 |
+
+Query 4: Churn Rate by Engineered Signup Cohort
+- Business Question: How does churn behave across different historical signup cohorts? Are newer cohorts churning faster than older ones?
+- Tables/Columns: `cleaned_saas_churn` (MonthsSubscribed, Churn_Flag).
+- Expected Output: 3 columns (cohort, Total_Customers, Churn_Rate_Pct). Requires engineering a proxy signup month by subtracting `MonthsSubscribed` from a static anchor date ('2023-12-01').
+
+### Churn by Proxy Signup Cohort
+
+| cohort  | Total_Customers | Churn_Rate_Pct |
+| ------- | --------------- | -------------- |
+| 2017-12 | 362             | 1.66           |
+| 2018-01 | 170             | 3.53           |
+| 2018-02 | 119             | 9.24           |
+| 2018-03 | 95              | 8.42           |
+| 2018-04 | 100             | 9.00           |
+| 2018-05 | 98              | 10.20          |
+
+*(Output truncated for brevity. Shows initial stable cohorts before the Year 1 drop-off begins to accelerate.)*
+
+Query 5: Top Decile Churn Rate
+- Business Question: What is the churn rate of our highest-revenue decile (top 10% of customers by MRR), and what does this imply for business risk?
+- Tables/Columns: `cleaned_saas_churn` (customerID, MRR, Churn_Flag).
+- Expected Output: 3 columns (bucket, Total_Customers, Churn_Rate_Pct) filtering strictly to the top revenue decile.
+
+### Churn Rate of Top 10% MRR Customers
+
+| bucket | Total_Customers | Churn_Rate_Pct |
+| ------ | --------------- | -------------- |
+| 1      | 705             | 24.68          |
+
+## Key Insights
+- **Diffuse Revenue Risk, Not Account Concentration:** While the top 10% highest-paying tier churns at an alarming 24.68% (mirroring the 26.5% baseline), the highest individual lost account is only $118/month (<0.09% of total churned revenue). The business does not face enterprise 'whale' concentration risk; the financial bleeding is entirely driven by high-volume, low-MRR cancellations.
