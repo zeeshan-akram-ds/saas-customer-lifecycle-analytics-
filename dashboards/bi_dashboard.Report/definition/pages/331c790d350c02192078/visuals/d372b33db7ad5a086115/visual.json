@@ -4,10 +4,10 @@
   "position": {
     "x": 776.20570623458968,
     "y": 7.2138076787601264,
-    "z": 5002,
+    "z": 6000,
     "height": 69.252553716097211,
     "width": 240.94117647058823,
-    "tabOrder": 5002
+    "tabOrder": 6000
   },
   "visual": {
     "visualType": "slicer",
@@ -143,6 +143,19 @@
     },
     "visualContainerObjects": {
       "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualHeader": [
         {
           "properties": {
             "show": {

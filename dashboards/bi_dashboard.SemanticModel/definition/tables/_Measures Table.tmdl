@@ -21,6 +21,52 @@ table '_Measures Table'
 		formatString: \$#,0;(\$#,0);\$#,0
 		lineageTag: ec1fbd87-642e-4238-a897-00de066d07cf
 
+	measure 'Average MRR' = AVERAGE(fact_churn[MRR])
+		lineageTag: 4626845a-8ddc-4295-b638-e78cf73896eb
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Average Tenure' = AVERAGE(fact_churn[MonthsSubscribed])
+		lineageTag: 54ecb04f-ee08-4d21-bd46-4a4d51bf9c36
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Color Measure' =
+			
+			IF([Churn Rate %] >= 0.4, "#EF4444", BLANK())
+		lineageTag: 49eb2b38-98c7-4268-8283-d520353df7c2
+
+	measure 'Font Color' =
+			
+			IF([Churn Rate %] >= 0.4, "#FFFFFF", BLANK())
+		lineageTag: a0e381fb-3e9c-4b4e-a22d-69e3a1a932ec
+
+	measure CEO_Insight_Text =
+			
+			VAR MonthlyRisk = [Revenue at Risk]
+			VAR NinetyDayRisk = MonthlyRisk * 3
+			VAR Formatted90Day = FORMAT(NinetyDayRisk, "$#,#")
+			VAR M2M_Risk = CALCULATE([Revenue at Risk], dim_contract[Contract] = "Month-to-month")
+			VAR M2M_Pct = FORMAT(DIVIDE(M2M_Risk, MonthlyRisk), "0.0%")
+			RETURN
+			"If we take no action, we risk losing " & Formatted90Day & " in unrealized revenue over the next 90 days. " &
+			"The financial bleeding is highly concentrated: Month-to-month contracts alone account for " & M2M_Pct & " of this total loss."
+		lineageTag: ed2bafa8-fdd4-460e-a27a-8816b2ea61b3
+
+	measure 'Dynamic Title' =
+			
+			VAR InternetLevel = COUNTROWS(VALUES(fact_churn[InternetService]))
+			VAR ContractLevel = COUNTROWS(VALUES(dim_contract[Contract]))
+			
+			RETURN
+			SWITCH(
+			    TRUE(),
+			    InternetLevel > 1, "Revenue at Risk — by Internet Service",
+			    ContractLevel > 1, "Revenue at Risk — by Contract Type",
+			    "Revenue at Risk"
+			)
+		lineageTag: 5fe7e250-5288-45c0-af63-d341205e11d1
+
 	partition '_Measures Table' = m
 		mode: import
 		source =

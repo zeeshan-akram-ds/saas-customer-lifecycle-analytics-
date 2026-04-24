@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.5.0/schema.json",
-  "name": "0ab410ee080b0b7e970e",
+  "name": "cdf35617d344e5804ea1",
   "position": {
-    "x": 340.2162586726011,
+    "x": 669.57455164288513,
     "y": 88.070166252127237,
-    "z": 2000,
+    "z": 3000,
     "height": 119.43762272548763,
-    "width": 287.13287079460662,
-    "tabOrder": 2000
+    "width": 285.92643016101584,
+    "tabOrder": 3000
   },
   "visual": {
     "visualType": "card",
@@ -23,11 +23,11 @@
                       "Entity": "_Measures Table"
                     }
                   },
-                  "Property": "Churn Rate %"
+                  "Property": "Total MRR"
                 }
               },
-              "queryRef": "_Measures Table.Churn Rate %",
-              "nativeQueryRef": "Churn Rate %"
+              "queryRef": "_Measures Table.Total MRR",
+              "nativeQueryRef": "Total MRR"
             }
           ]
         }
@@ -73,7 +73,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#EF4444'"
+                      "Value": "'#334155'"
                     }
                   }
                 }

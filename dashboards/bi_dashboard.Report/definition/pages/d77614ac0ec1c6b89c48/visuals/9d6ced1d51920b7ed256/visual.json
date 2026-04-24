@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.5.0/schema.json",
-  "name": "0ab410ee080b0b7e970e",
+  "name": "9d6ced1d51920b7ed256",
   "position": {
-    "x": 340.2162586726011,
+    "x": 991.69420081162446,
     "y": 88.070166252127237,
-    "z": 2000,
+    "z": 4000,
     "height": 119.43762272548763,
-    "width": 287.13287079460662,
-    "tabOrder": 2000
+    "width": 288.33931142819739,
+    "tabOrder": 4000
   },
   "visual": {
     "visualType": "card",
@@ -23,11 +23,11 @@
                       "Entity": "_Measures Table"
                     }
                   },
-                  "Property": "Churn Rate %"
+                  "Property": "Revenue at Risk"
                 }
               },
-              "queryRef": "_Measures Table.Churn Rate %",
-              "nativeQueryRef": "Churn Rate %"
+              "queryRef": "_Measures Table.Revenue at Risk",
+              "nativeQueryRef": "Revenue at Risk"
             }
           ]
         }

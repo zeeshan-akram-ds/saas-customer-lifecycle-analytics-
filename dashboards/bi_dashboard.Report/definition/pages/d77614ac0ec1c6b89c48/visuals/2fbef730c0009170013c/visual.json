@@ -1,0 +1,82 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.5.0/schema.json",
+  "name": "2fbef730c0009170013c",
+  "position": {
+    "x": 669.44135258893982,
+    "y": 349.14829165199012,
+    "z": 10000,
+    "height": 187.5589996477633,
+    "width": 592.97499119408246,
+    "tabOrder": 10000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "RECOMMENDED ACTION",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "12pt",
+                      "color": "#ef4444"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Stop incentivizing month-to-month signups. Shift marketing spend to acquire 1-year contracts, even at a higher CAC, to stabilize the Year 1 retention cliff.",
+                    "textStyle": {
+                      "fontSize": "12pt",
+                      "color": "#334155"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Execute an immediate retention intervention targeting Month-to-Month Fiber Optic users, as this specific cross-section carries our highest localized churn rate (54.6%).",
+                    "textStyle": {
+                      "fontSize": "12pt",
+                      "color": "#334155"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.5.0/schema.json",
-  "name": "0ab410ee080b0b7e970e",
+  "name": "d69d3d5e6072e05ac017",
   "position": {
-    "x": 340.2162586726011,
+    "x": 10.857965702317056,
     "y": 88.070166252127237,
-    "z": 2000,
+    "z": 1000,
     "height": 119.43762272548763,
-    "width": 287.13287079460662,
-    "tabOrder": 2000
+    "width": 288.33931142819739,
+    "tabOrder": 1000
   },
   "visual": {
     "visualType": "card",
@@ -23,11 +23,11 @@
                       "Entity": "_Measures Table"
                     }
                   },
-                  "Property": "Churn Rate %"
+                  "Property": "Total Customers"
                 }
               },
-              "queryRef": "_Measures Table.Churn Rate %",
-              "nativeQueryRef": "Churn Rate %"
+              "queryRef": "_Measures Table.Total Customers",
+              "nativeQueryRef": "Total Customers"
             }
           ]
         }
@@ -73,7 +73,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#EF4444'"
+                      "Value": "'#334155'"
                     }
                   }
                 }
@@ -84,39 +84,6 @@
       ]
     },
     "visualContainerObjects": {
-      "title": [
-        {
-          "properties": {
-            "titleWrap": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "background": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "transparency": {
-              "expr": {
-                "Literal": {
-                  "Value": "0D"
-                }
-              }
-            }
-          }
-        }
-      ],
       "border": [
         {
           "properties": {
@@ -142,13 +109,6 @@
               "expr": {
                 "Literal": {
                   "Value": "4D"
-                }
-              }
-            },
-            "width": {
-              "expr": {
-                "Literal": {
-                  "Value": "1D"
                 }
               }
             }
